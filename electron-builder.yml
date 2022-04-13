@@ -1,0 +1,46 @@
+directories:
+  buildResources: buildResources
+  output: dist
+extraResources: ["tools", "external-resources", 'firmwares', "statics", "drivers"]
+
+appId: 'openblock.cc.openblock-link-desktop'
+productName: "WiinBlock"
+publish: # empty provider list = don't publish
+
+mac:
+  category: public.app-category.education
+  entitlements: buildResources/entitlements.mac.plist
+  gatekeeperAssess: true
+  hardenedRuntime: true
+  icon: buildResources/OpenBlock-Link.icns
+  provisioningProfile: embedded.provisionprofile
+  artifactName: "OpenBlock Link ${version}.${ext}"
+  target:
+    - dmg
+    # - mas
+dmg:
+  title: "OpenBlock Link ${version}"
+# mas:
+#   category: public.app-category.education
+#   entitlements: buildResources/entitlements.mas.plist
+#   entitlementsInherit: buildResources/entitlements.mas.inherit.plist
+#   hardenedRuntime: false
+#   icon: buildResources/OpenBlock-Link.icns
+
+win:
+  icon: buildResources/WiinBlock-Link.ico
+  target:
+    # - appx
+    - nsis
+# appx:
+#   identityName: OpenBlock.OpenBlockLinkDesktop
+#   publisherDisplayName: "OpenBlock"
+#   publisher: "CN=2EC43DF1-469A-4119-9AB9-568A0A1FF65F"
+#   artifactName: "OpenBlock Link Desktop ${version}.${ext}"
+nsis:
+  oneClick: true # allow user to choose per-user or per-machine
+  allowToChangeInstallationDirectory: false
+  include: buildResources/installer.nsh
+  createDesktopShortcut: true
+#   license: LICENSE
+  artifactName: "WiinBlock ${version} Setup.${ext}"
